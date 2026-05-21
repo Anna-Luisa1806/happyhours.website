@@ -2,10 +2,11 @@
   "version": 2,
   "builds": [
     { "src": "api/subscribe.js", "use": "@vercel/node" },
-    { "src": "index.html",       "use": "@vercel/static" }
+    { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
-    { "src": "/(.*)",          "dest": "/index.html" }
+    { "src": "/anbieter", "dest": "/anbieter.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
