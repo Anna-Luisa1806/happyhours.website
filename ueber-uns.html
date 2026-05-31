@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Über uns – Happy Hours</title>
+  <meta name="description" content="Die Geschichte hinter Happy Hours – warum wir eine Plattform für echte Erlebnisse in NRW gebaut haben."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #0d0527; --pink: #f071c0; --white: #f0ecff; --muted: rgba(240,236,255,0.55); --border: rgba(240,113,192,0.2); --font: 'Lexend', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--white); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(240,113,192,0.08) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(13,5,39,0.95), transparent); backdrop-filter: blur(4px); }
+    .logo { font-size: 22px; font-weight: 800; color: var(--white); text-decoration: none; letter-spacing: -0.5px; }
+    .logo span { color: var(--pink); }
+    .back-btn { font-size: 13px; font-weight: 600; color: var(--muted); border: 1px solid var(--border); padding: 7px 16px; border-radius: 100px; text-decoration: none; transition: all 0.2s; }
+    .back-btn:hover { color: var(--pink); border-color: var(--pink); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 32px 80px; position: relative; z-index: 1; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); padding: 8px 18px; border: 1px solid var(--border); border-radius: 100px; background: rgba(240,113,192,0.06); margin-bottom: 32px; animation: fadeUp 0.6s ease both; }
+    .hero h1 { font-size: clamp(38px, 6.5vw, 76px); font-weight: 800; line-height: 1.05; letter-spacing: -2.5px; max-width: 820px; margin: 0 auto 24px; animation: fadeUp 0.6s 0.1s ease both; }
+    .hero h1 em { font-style: normal; color: var(--pink); }
+    .hero p { font-size: clamp(16px, 2vw, 20px); color: var(--muted); max-width: 540px; margin: 0 auto 48px; line-height: 1.8; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
+    .scroll-hint { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--muted); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; animation: fadeUp 0.6s 0.4s ease both; }
+    .scroll-arrow { width: 18px; height: 18px; border-right: 2px solid rgba(240,113,192,0.4); border-bottom: 2px solid rgba(240,113,192,0.4); transform: rotate(45deg); animation: bounce 1.5s infinite; }
+    @keyframes bounce { 0%,100%{transform:rotate(45deg) translate(0,0);opacity:0.5} 50%{transform:rotate(45deg) translate(3px,3px);opacity:1} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+    /* STORY */
+    .story-section { padding: 80px 32px; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 60px; }
+    .story-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+    .story-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 24px; }
+    .story-title em { font-style: normal; color: var(--pink); }
+    .story-text p { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 18px; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-text strong { color: var(--white); }
+    .quote-card { background: linear-gradient(135deg, rgba(240,113,192,0.1), rgba(45,27,94,0.5)); border: 1px solid rgba(240,113,192,0.25); border-radius: 24px; padding: 40px; position: relative; overflow: hidden; }
+    .quote-card::before { content: '"'; position: absolute; top: -20px; left: 20px; font-size: 120px; color: rgba(240,113,192,0.1); font-weight: 900; line-height: 1; }
+    .quote-text { font-size: 20px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; position: relative; z-index: 1; }
+    .quote-text em { color: var(--pink); font-style: normal; }
+    .quote-source { font-size: 13px; color: var(--muted); position: relative; z-index: 1; }
+
+    /* IMAGE SECTION */
+    .img-section { position: relative; z-index: 1; margin: 0 0 0; }
+    .img-wrapper { position: relative; overflow: hidden; }
+    .img-wrapper img { width: 100%; height: 520px; object-fit: cover; display: block; }
+    .img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(13,5,39,0.2) 0%, rgba(13,5,39,0.6) 100%); }
+    .img-caption { position: absolute; bottom: 48px; left: 48px; right: 48px; }
+    .img-caption h2 { font-size: clamp(28px, 4vw, 52px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; }
+    .img-caption h2 em { font-style: normal; color: var(--pink); }
+
+    /* STORY PART 2 */
+    .story2-section { padding: 80px 32px; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .story2-card { background: linear-gradient(135deg, rgba(22,8,64,0.95), rgba(45,27,94,0.4)); border: 1px solid var(--border); border-radius: 24px; padding: 48px; position: relative; overflow: hidden; }
+    .story2-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--pink), transparent); }
+    .story2-card p { font-size: 16px; color: var(--muted); line-height: 1.9; margin-bottom: 18px; }
+    .story2-card p:last-child { margin-bottom: 0; }
+    .story2-card strong { color: var(--white); }
+
+    /* VALUES */
+    .values-section { padding: 80px 32px; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    .values-header { text-align: center; margin-bottom: 48px; }
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .value-card { background: rgba(22,8,64,0.5); border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; transition: transform 0.2s, border-color 0.2s; }
+    .value-card:hover { transform: translateY(-4px); border-color: rgba(240,113,192,0.4); }
+    .value-icon { font-size: 32px; margin-bottom: 14px; }
+    .value-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .value-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* CTA */
+    .cta-section { padding: 100px 32px; text-align: center; border-top: 1px solid var(--border); background: linear-gradient(180deg, transparent, rgba(240,113,192,0.04)); position: relative; z-index: 1; }
+    .cta-section h2 { font-size: clamp(30px, 4.5vw, 56px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+    .cta-section h2 em { font-style: normal; color: var(--pink); }
+    .cta-section p { font-size: 17px; color: var(--muted); margin-bottom: 40px; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; margin-bottom: 40px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--pink); color: #0d0527; font-family: var(--font); font-size: 15px; font-weight: 700; padding: 15px 32px; border-radius: 100px; border: none; text-decoration: none; transition: all 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(240,113,192,0.4); }
+    .btn-outline { background: transparent; color: var(--white); font-family: var(--font); font-size: 15px; font-weight: 600; padding: 14px 32px; border-radius: 100px; border: 1.5px solid rgba(240,236,255,0.25); text-decoration: none; transition: all 0.2s; }
+    .btn-outline:hover { border-color: var(--pink); color: var(--pink); }
+
+    footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; position: relative; z-index: 1; }
+    footer p { font-size: 13px; color: var(--muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: 13px; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--pink); }
+
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .story-section, .story2-section, .values-section { padding: 60px 20px; }
+      .story-grid { grid-template-columns: 1fr; gap: 32px; }
+      .values-grid { grid-template-columns: 1fr; }
+      .story2-card { padding: 28px 24px; }
+      .img-wrapper img { height: 300px; }
+      .img-caption { bottom: 24px; left: 24px; right: 24px; }
+      .cta-section { padding: 60px 20px; }
+      footer { padding: 24px 20px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">happy<span>hours</span></a>
+  <a href="/" class="back-btn">← Zurück</a>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">✦ Unsere Geschichte</div>
+  <h1>Warum wir <em>Happy Hours</em><br/>gebaut haben.</h1>
+  <p>Es gibt einen Moment, den fast jeder kennt. Neues Kapitel, neue Stadt – und die große Frage: Wie lerne ich hier eigentlich Menschen kennen?</p>
+  <div class="scroll-hint">
+    <span>Mehr erfahren</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- STORY PART 1 -->
+<div class="story-section">
+  <div class="story-grid">
+    <div>
+      <div class="story-label">Der Anfang</div>
+      <div class="story-title">Wir kannten das<br/>Gefühl <em>selbst.</em></div>
+      <div class="story-text">
+        <p>Neues Studium. Neue Stadt. Neuer Job. <strong>Immer wieder von vorne anfangen.</strong> Jeder kennt diesen Moment – du bist irgendwo neu, die Wohnung ist noch halb leer, und du fragst dich: Wo sind eigentlich die Menschen, die so ticken wie ich?</p>
+        <p>Wir haben das beide erlebt. Du hast einen vollen Terminkalender, aber irgendwie keine echten Verbindungen. Du scrollst durch Social Media und siehst, wie andere Dinge erleben – und denkst: Warum bin ich da nicht dabei?</p>
+        <p>Dating-Apps fühlen sich falsch an. Freunde aus der alten Heimat sind weit weg. Und spontan fremde Menschen ansprechen? Das ist für die meisten einfach nicht so einfach.</p>
+      </div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">„Was wäre, wenn der einfachste Weg neue Menschen kennenzulernen einfach eine gemeinsame Aktivität wäre – ohne Druck, ohne <em>Erwartungen?</em>"</div>
+      <div class="quote-source">— Die Idee hinter Happy Hours</div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE BREAK -->
+<div class="img-section">
+  <div class="img-wrapper">
+    <img src="/ueber-uns-hero.webp" alt="Happy Hours Community"/>
+    <div class="img-overlay"></div>
+    <div class="img-caption">
+      <h2>Gemeinsam erleben.<br/><em>Echte Momente.</em></h2>
+    </div>
+  </div>
+</div>
+
+<!-- STORY PART 2 -->
+<div class="story2-section">
+  <div class="story2-card">
+    <div class="story-label" style="margin-bottom:20px">Genau da entstand Happy Hours.</div>
+    <p>Nicht aus einer Marktlücken-Analyse, sondern aus einem echten Bedürfnis. Wir wollten eine Plattform schaffen, auf der sich Menschen ganz natürlich begegnen – beim Kochen, beim Sport, beim Kreativ-Workshop.</p>
+    <p><strong>Kein Smalltalk-Stress. Kein unangenehmes Kennenlernen.</strong> Einfach eine Aktivität die verbindet, und Menschen die dasselbe wollen wie du: Etwas erleben. Lachen. Dazugehören.</p>
+    <p>Wir starten in NRW – bewusst. Weil wir diese Region kennen, lieben und wissen, dass hier tausende Menschen genau auf so etwas gewartet haben.</p>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values-section">
+  <div class="values-header">
+    <div class="story-label">Was uns antreibt</div>
+    <div class="story-title">Unsere <em>Werte</em></div>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <div class="value-title">Echte Verbindungen</div>
+      <div class="value-text">Die besten Freundschaften entstehen beim gemeinsamen Tun – nicht beim Profil-Scrollen.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌱</div>
+      <div class="value-title">Community first</div>
+      <div class="value-text">Jede Entscheidung stellen wir die Frage: Ist das gut für unsere Community? Zahlen kommen danach.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">💡</div>
+      <div class="value-title">Fairness für Anbieter</div>
+      <div class="value-text">Wir behandeln Anbieter wie Partner. Transparente Preise, persönlicher Kontakt, keine versteckten Kosten.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🏙️</div>
+      <div class="value-title">Lokal verwurzelt</div>
+      <div class="value-text">Wir starten in NRW – weil wir hier zuhause sind und wissen, was die Menschen hier bewegt.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">✨</div>
+      <div class="value-title">Qualität über Quantität</div>
+      <div class="value-text">Lieber wenige wirklich gute Kurse als tausende mittelmäßige – dafür haben wir ein Bewertungssystem.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🚀</div>
+      <div class="value-title">Mutig anders sein</div>
+      <div class="value-text">Wir sind kein weiterer Kursmarktplatz. Wir bauen eine Community – das ist unser Unterschied.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Bist du dabei,<br/><em>Happy Hours?</em></h2>
+  <p>Egal ob du Erlebnisse suchst oder anbietest – wir freuen uns auf dich. Lass uns gemeinsam etwas aufbauen.</p>
+  <div class="cta-btns">
+    <a href="/#forms" class="btn-primary">✦ Jetzt vormerken</a>
+    <a href="/anbieter" class="btn-outline">Anbieter werden →</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Happy Hours · Euskirchen, NRW</p>
+  <div class="footer-links">
+    <a href="/">Impressum</a>
+    <a href="/">Datenschutz</a>
+  </div>
+</footer>
+
+</body>
+</html>

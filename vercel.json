@@ -4,7 +4,8 @@
     { "src": "api/subscribe.js", "use": "@vercel/node" },
     { "src": "*.html", "use": "@vercel/static" },
     { "src": "*.png", "use": "@vercel/static" },
-    { "src": "*.jpg", "use": "@vercel/static" }
+    { "src": "*.jpg", "use": "@vercel/static" },
+    { "src": "*.webp", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
@@ -12,6 +13,7 @@
     { "src": "/ueber-uns", "dest": "/ueber-uns.html" },
     { "src": "/hh.png", "dest": "/hh.png" },
     { "src": "/hero.jpg", "dest": "/hero.jpg" },
+    { "src": "/ueber-uns-hero.webp", "dest": "/ueber-uns-hero.webp" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "headers": [
