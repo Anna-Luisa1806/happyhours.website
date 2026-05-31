@@ -9,6 +9,7 @@
   "routes": [
     { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
     { "src": "/anbieter", "dest": "/anbieter.html" },
+    { "src": "/ueber-uns", "dest": "/ueber-uns.html" },
     { "src": "/hh.png", "dest": "/hh.png" },
     { "src": "/hero.jpg", "dest": "/hero.jpg" },
     { "src": "/(.*)", "dest": "/index.html" }
