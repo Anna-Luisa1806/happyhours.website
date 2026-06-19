@@ -69,11 +69,24 @@
       align-items: center; justify-content: center;
       text-align: center; padding: 120px 32px 48px; position: relative; overflow: hidden;
     }
-    .hero::before {
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0; height: 100%;
+    }
+    .hero-bg img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; object-position: center 35%;
+      opacity: 0.34; filter: saturate(0.7) brightness(0.85);
+    }
+    .hero-bg::after {
       content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(13,5,39,0.55) 0%, rgba(13,5,39,0.78) 40%, rgba(13,5,39,0.95) 78%, var(--bg) 100%);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
       background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,113,192,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
+    .hero > *:not(.hero-bg) { position: relative; z-index: 2; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
@@ -101,6 +114,19 @@
     .marquee-wrap {
       overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       padding: 16px 0; background: rgba(240,113,192,0.04);
+    }
+
+    .gallery-strip {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
+      max-width: 1080px; margin: 64px auto 0; padding: 0 32px;
+    }
+    .gallery-strip img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 18px;
+      border: 1px solid var(--border); aspect-ratio: 3/4;
+    }
+    @media (max-width: 900px) {
+      .gallery-strip { grid-template-columns: 1fr 1fr; padding: 0 20px; margin-top: 40px; }
+      .gallery-strip img:last-child { display: none; }
     }
     .marquee-track { display: flex; gap: 48px; width: max-content; animation: marquee 22s linear infinite; }
     .marquee-item {
@@ -164,8 +190,8 @@
     .pricing-card.featured::before { display: none; }
     .pricing-card:hover { transform: translateY(-4px); }
     .pricing-range { font-size: 13px; color: var(--muted); margin-bottom: 14px; font-weight: 500; }
-    .pricing-percent { font-size: 60px; font-weight: 900; letter-spacing: -2px; color: var(--white); line-height: 1; }
-    .pricing-percent span { font-size: 28px; color: var(--white); }
+    .pricing-percent { font-size: 38px; font-weight: 800; letter-spacing: -1px; color: var(--white); line-height: 1; }
+    .pricing-percent span { font-size: 20px; color: var(--white); font-weight: 600; }
     .pricing-label { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
     .pricing-note { text-align: center; margin-top: 28px; font-size: 15px; color: var(--muted); }
     .pricing-note strong { color: var(--pink); }
@@ -318,6 +344,7 @@
 
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-bg"><img src="/anbieter-hero.jpg" alt="" /></div>
   <div class="hero-eyebrow">✦ Für Anbieter & Dienstleister</div>
   <h1>Mach deine Leidenschaft<br/>zu einem <em>echten Business.</em></h1>
   <p class="hero-sub">Happy Hours verbindet Anbieter von Kursen, Workshops und Erlebnissen mit Menschen, die genau das suchen. Kostenlos starten – wir verdienen nur wenn du verdienst.</p>
@@ -344,6 +371,13 @@
   </div>
 </div>
 
+<!-- GALLERY -->
+<div class="gallery-strip">
+  <img src="/anbieter-1.jpg" alt="Töpferkurs bei Happy Hours" />
+  <img src="/anbieter-2.jpg" alt="Gemeinsamer Tisch bei einem Erlebnis" />
+  <img src="/anbieter-3.jpg" alt="Happy Hours Markenwelt" />
+</div>
+
 <!-- PROBLEM -->
 <section class="problem-section">
   <div class="section-inner">
@@ -352,7 +386,7 @@
         <div class="stag">Das Problem</div>
         <h2 class="section-title">Du bist gut in dem was du tust.<br/><em>Aber niemand findet dich.</em></h2>
         <p>Du bietest tolle Kurse, Workshops oder Erlebnisse an – aber deine Reichweite hängt davon ab, wie viel Zeit du in Marketing steckst. Zeit, die dir für dein eigentliches Angebot fehlt.</p>
-        <p>Genau hier kommen wir ins Spiel. <strong>Happy Hours übernimmt deine digitale Sichtbarkeit</strong> – damit du dich auf das konzentrieren kannst, was du wirklich liebst.</p>
+        <p>Genau hier kommen wir ins Spiel. <strong>Happy Hours bringt dir Menschen, die nicht nur einen Kurs suchen, sondern echte Begegnung</strong> – damit aus deinen Teilnehmern eine Community wird, die wiederkommt.</p>
       </div>
       <div class="problem-cards">
         <div class="problem-card">
@@ -428,23 +462,24 @@
     <h2 class="section-title"><em>Je erfolgreicher du bist,</em><br/>desto weniger zahlst du.</h2>
     <p class="section-sub">Keine Grundgebühr. Keine versteckten Kosten. Nur eine faire Provision auf den Gesamtumsatz deines Events.</p>
     <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-range">Event-Umsatz bis 50 €</div>
-        <div class="pricing-percent">15<span>%</span></div>
+      <div class="pricing-card featured">
+        <div class="pricing-range">Event-Umsatz ab 201 €</div>
+        <div class="pricing-percent">12<span>%</span></div>
         <div class="pricing-label">Provision auf den<br/>Gesamtumsatz des Events</div>
       </div>
-      <div class="pricing-card featured">
+      <div class="pricing-card">
         <div class="pricing-range">Event-Umsatz 51 – 200 €</div>
         <div class="pricing-percent">13<span>,5%</span></div>
         <div class="pricing-label">Provision auf den<br/>Gesamtumsatz des Events</div>
       </div>
       <div class="pricing-card">
-        <div class="pricing-range">Event-Umsatz ab 201 €</div>
-        <div class="pricing-percent">12<span>%</span></div>
+        <div class="pricing-range">Event-Umsatz bis 50 €</div>
+        <div class="pricing-percent">15<span>%</span></div>
         <div class="pricing-label">Provision auf den<br/>Gesamtumsatz des Events</div>
       </div>
     </div>
-    <p class="pricing-note">Keine Buchung = <strong>keine Kosten.</strong> Einfacher geht's nicht.</p>
+    <p class="pricing-note">Beispiel: Ein Kurs mit 10 Teilnehmenden à 25 € = 250 € Umsatz → <strong>nur 12 % Provision.</strong></p>
+    <p class="pricing-note" style="margin-top:8px">Keine Buchung = <strong>keine Kosten.</strong> Einfacher geht's nicht.</p>
   </div>
 </section>
 
