@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/subscribe.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.png", "use": "@vercel/static" },
+    { "src": "*.jpg", "use": "@vercel/static" },
+    { "src": "*.webp", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
+    { "src": "/anbieter", "dest": "/anbieter.html" },
+    { "src": "/ueber-uns", "dest": "/ueber-uns.html" },
+    { "src": "/erleben", "dest": "/erleben.html" },
+    { "src": "/anbieten", "dest": "/anbieten.html" },
+    { "src": "/zettel", "dest": "/index.html" },
+    { "src": "/hh.png", "dest": "/hh.png" },
+    { "src": "/hero.jpg", "dest": "/hero.jpg" },
+    { "src": "/ueber-uns-hero.webp", "dest": "/ueber-uns-hero.webp" },
+    { "src": "/anbieter-hero.jpg", "dest": "/anbieter-hero.jpg" },
+    { "src": "/anbieter-1.jpg", "dest": "/anbieter-1.jpg" },
+    { "src": "/anbieter-2.jpg", "dest": "/anbieter-2.jpg" },
+    { "src": "/anbieter-3.jpg", "dest": "/anbieter-3.jpg" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" }
+      ]
+    }
+  ]
+}
